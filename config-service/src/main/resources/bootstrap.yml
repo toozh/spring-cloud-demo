@@ -1,0 +1,7 @@
+Aliyun:
+  FileCenter:
+    STORAGE_PATH: http://yyssb.ifitmix.com/
+  ENDPOINT: http://oss-cn-shenzhen.aliyuncs.com
+  ACCESS_ID: sSkFTSmk7h8kzjYi
+  ACCESS_KEY: j2M57zDaJ5X6wAmzKtGEqQSR0MwTk8
+  BUCKET_NAME: igeekery

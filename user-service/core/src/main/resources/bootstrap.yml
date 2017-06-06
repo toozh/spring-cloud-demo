@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: user-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://10.10.8.238:8888}
+      failFast: true
+      profile: dev
+server:
+  port: 23112

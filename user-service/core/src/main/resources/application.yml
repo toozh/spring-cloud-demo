@@ -1,0 +1,27 @@
+
+spring:
+  application:
+    name: user-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://10.10.238.8:8888}
+      failFast: true
+      profile: dev
+#  data:
+#    mongodb:
+#      uri: mongodb://127.0.0.1:27017/business
+encrypt:
+  failOnError: true
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: 23112
+
+Aliyun:
+  FileCenter:
+    STORAGE_PATH: http://yyssb.ifitmix.com
+  ENDPOINT: http://oss-cn-shenzhen.aliyuncs.com
+  ACCESS_ID: sSkFTSmk7h8kzjYi
+  ACCESS_KEY: j2M57zDaJ5X6wAmzKtGEqQSR0MwTk8
+  BUCKET_NAME: igeekery

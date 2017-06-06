@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://10.10.8.238:8888}
+      failFast: true
+      profile: dev
+  redis:
+    host: 10.10.8.136
+    database: 1
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 5000000
+encrypt:
+  failOnError: true
+
+
+
+#security:
+#  sessions: stateless
+#  oauth2:
+#    resource:
+#      loadBalanced: true #必须要有 负责获取不到user信息
+#      id: gateway-service
+#      user-info-uri: http://auth-service/uaa/user # auth-server 是注册到eureka的服务名称
+#      prefer-token-info: false # 不使用/oauth/check_token,因为不能负载均衡 使用在auth-server端实现的 /user api.
+#security:
+#  oauth2:
+#    resource:
+##      token-info-uri:
+#        token-info-uri: http://localhost:9999/uaa/oauth/check_token
+##      user-info-uri: http://auth-service/uaa/user
+##      prefer-token-info: false
+#    client:
+#      clientId: zhangtao
+#      clientSecret: zhangtao
+#      userAuthorizationUri: http://auth-service/uaa/oauth/authorize
+#      accessTokenUri: http://auth-service/uaa/oauth/token
+#      grantType: client_credentials
+#      scope: app
+#  basic:
+#    enabled: false
+#logging:
+#  level:
+#    org.springframework.security: debug

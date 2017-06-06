@@ -1,0 +1,43 @@
+server:
+  port: 23113
+spring:
+  application:
+    name: club-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://10.10.8.238:8888}
+      failFast: true
+      profile: dev
+  output:
+    ansi:
+      enabled: always
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+  metrics:
+    enabled: false
+#security:
+#  sessions: stateless
+#  oauth2:
+#    resource:
+#      loadBalanced: true #必须要有 负责获取不到user信息
+#      id: club-service
+#      user-info-uri: http://auth-service/uaa/user # auth-server 是注册到eureka的服务名称
+#      prefer-token-info: false # 不使用/oauth/check_token,因为不能负载均衡 使用在auth-server端实现的 /user api.
+
+# 阿里云对象存储配置
+Aliyun:
+  FileCenter:
+    STORAGE_PATH: http://yyssb.ifitmix.com
+  ENDPOINT: http://oss-cn-shenzhen.aliyuncs.com
+  ACCESS_ID: sSkFTSmk7h8kzjYi
+  ACCESS_KEY: j2M57zDaJ5X6wAmzKtGEqQSR0MwTk8
+  BUCKET_NAME: igeekery
+logging:
+  level:
+    org.springframework.security: debug
