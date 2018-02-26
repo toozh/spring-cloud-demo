@@ -10,7 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Import;
+
 
 /**
  * Created by zhangtao on 2017/5/10.
@@ -18,6 +20,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
+@EnableHystrixDashboard
 @Import({BaseConfiguration.class, ServiceClientConfiguration.class, WebApplication.class,
         WebMvcConfiguration.class, SchedulerConfiguration.class, EventConfiguration.class})
 public class ClubApplication {

@@ -94,7 +94,10 @@ public class AccessFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         logger.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
-
+        if(request.getRequestURI().toString().equals("/v1/club/index")) {
+            createResponse(ctx, 0, "test");
+            return null;
+        }
         // 获取token
         String accessToken = null;
         String authHeader = request.getHeader("Authorization");

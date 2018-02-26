@@ -7,4 +7,11 @@ spring:
       failFast: true
       profile: dev
 server:
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 1000
+    accept-count: 500
+    max-connections: 1000
   port: 23112

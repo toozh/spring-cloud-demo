@@ -1,2 +1,22 @@
-logging:
-  file: discovery-service.log
+#logging:
+#  file: discovery-service.log
+
+# Configure this Discovery Server
+eureka:
+  instance:
+    # hostname: localhost
+    preferIpAddress: true
+  client:  # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://10.10.8.238:8761/eureka/
+  server:
+    enable-self-preservation: false
+
+server:
+  tomcat:
+    max-threads: 1000
+    accept-count: 500
+    max-connections: 1000
+  port: 8761

@@ -4,6 +4,8 @@ package com.ifitmix.common.spring.interceptor;
 import com.ifitmix.common.context.SystemContext;
 import com.ifitmix.common.context.SystemContextHolder;
 import com.ifitmix.utils.HttpUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  * 基本参数拦截器
  */
 public class AppBaseInterceptor implements HandlerInterceptor {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppBaseInterceptor.class);
 
     /**
      * 请求里k参数的对应的KEY
@@ -114,6 +118,8 @@ public class AppBaseInterceptor implements HandlerInterceptor {
         systemContext.setIp(HttpUtil.getIP(request));
         // 设置 加密 key
         SystemContextHolder.put(systemContext);
+
+        logger.info("正在处理。。。。");
 
         return true;
     }

@@ -1,5 +1,6 @@
 package com.ifitmix.utils;
 
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 
 public class MD5Util {

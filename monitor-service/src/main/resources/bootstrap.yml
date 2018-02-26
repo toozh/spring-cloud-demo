@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: monitor-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://42.159.245.49:8888}
+      failFast: true
+      profile: dev
+
+eureka:
+  instance:
+    # hostname: localhost
+    preferIpAddress: true
+    metadata-map:
+      cluster: MONITOR-SERVICE
+  client:  # Not a client, don't register with yourself
+    serviceUrl:
+      defaultZone: http://42.159.245.49:8761/eureka/
+encrypt:
+  failOnError: true

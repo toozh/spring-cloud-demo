@@ -7,18 +7,18 @@ spring:
   cloud:
     config:
       server:
-#        native:
-#           search-locations: classpath:/shared
-        git:
-          uri: https://github.com/zhangtao0/ifitmix-repo
-          basedir: target/config
-          searchPaths: "*"
+        native:
+           search-locations: classpath:/shared
+#        git:
+#          uri: https://github.com/zhangtao0/ifitmix-repo
+#          basedir: target/config
+#          searchPaths: "*"
 
     stream:
       kafka:
         binder:
-          brokers: 10.10.8.238:9092
-          zkNodes: 10.10.8.238:2182,10.10.8.238:2183
+          brokers: 10.10.8.238:9092,10.10.8.238:9093,10.10.8.238:9094
+          zkNodes: 10.10.8.238:2181,10.10.8.238:2182,10.10.8.238:2183
           offsetUpdateTimeWindow: 10000
           #offsetUpdateCount: 0
           requiredAcks: 1
@@ -37,9 +37,9 @@ spring:
               bufferSize: 16384
               sync: true
               batchTimeout: 0
-              bootstrapServers: 10.10.8.238:9092
+#              bootstrapServers: 10.10.8.238:9092
   profiles:
-     active: dev
+     active: native
 
 
 management:

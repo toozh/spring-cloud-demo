@@ -43,3 +43,10 @@ ribbon:
 #  level:
 #    org: DEBUG
 #    com: DEBUG
+
+server:
+  tomcat:
+    max-threads: 1000
+    accept-count: 500
+    max-connections: 1000
+  port: 9000

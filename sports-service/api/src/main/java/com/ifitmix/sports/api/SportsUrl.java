@@ -5,7 +5,7 @@ package com.ifitmix.sports.api;
  */
 public interface SportsUrl {
 
-    String SERVICE_NAME = "SPORTS";
+    String SERVICE_NAME = "SPORTS-SERVICE";
 
     String SERVICE_HOSTNAME = "http://SPORTS-SERVICE";
 

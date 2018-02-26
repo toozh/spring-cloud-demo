@@ -45,6 +45,10 @@
         <commons-httpclient.version>3.1</commons-httpclient.version>
         <spring-boot-start-redis.version>1.4.6.RELEASE</spring-boot-start-redis.version>
         <xingePush.version>1.1.8</xingePush.version>
+        <prometheus.version>0.0.23</prometheus.version>
+        <actuator.version>1.5.2.RELEASE</actuator.version>
+        <docker.image.prefix>business</docker.image.prefix>
+        <docker.repostory>139.219.230.50:5000</docker.repostory>
     </properties>
 
     <build>
@@ -64,14 +68,26 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<fork>true</fork>&ndash;&gt;-->
+                <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
+            <!--</plugin>-->
         </plugins>
+
+        <!--添加利用maven插件构建docker镜像的插件依赖-->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.4.13</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
     </build>
 
     <dependencyManagement>
@@ -202,6 +218,46 @@
                 <groupId>com.github.xingePush</groupId>
                 <artifactId>xinge</artifactId>
                 <version>${xingePush.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${actuator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_common</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <!-- The client -->
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <!-- Hotspot JVM metrics-->
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_hotspot</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <!-- Exposition servlet-->
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_servlet</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <!-- Pushgateway exposition-->
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_pushgateway</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_spring_boot</artifactId>
+                <version>${prometheus.version}</version>
             </dependency>
 
         </dependencies>

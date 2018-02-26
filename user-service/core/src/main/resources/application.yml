@@ -1,22 +1,5 @@
-
-spring:
-  application:
-    name: user-service
-  cloud:
-    config:
-      uri: ${CONFIG_SERVER_URI:http://10.10.238.8:8888}
-      failFast: true
-      profile: dev
-#  data:
-#    mongodb:
-#      uri: mongodb://127.0.0.1:27017/business
 encrypt:
   failOnError: true
-server:
-  error:
-    whitelabel:
-      enabled: false
-  port: 23112
 
 Aliyun:
   FileCenter:

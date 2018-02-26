@@ -1,5 +1,15 @@
 server:
   port: 23113
+  tomcat:
+    max-threads: 2000
+    accept-count: 500
+    max-connections: 2000
+  undertow:
+    io-threads: 8
+    worker-threads: 64
+    buffer-size: 512 # 每块buffer的空间大小
+    buffers-per-region: 10 # 每个区分配的buffer数量
+    direct-buffers: true # 是否分配的直接内存
 spring:
   application:
     name: club-service
@@ -18,9 +28,9 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 5000
+            timeoutInMilliseconds: 10000
   metrics:
-    enabled: false
+    enabled: true
 #security:
 #  sessions: stateless
 #  oauth2:
@@ -29,6 +39,12 @@ hystrix:
 #      id: club-service
 #      user-info-uri: http://auth-service/uaa/user # auth-server 是注册到eureka的服务名称
 #      prefer-token-info: false # 不使用/oauth/check_token,因为不能负载均衡 使用在auth-server端实现的 /user api.
+
+endpoints:
+  metrics:
+    id: springmetrics
+    sensitive: false
+    enabled: false
 
 # 阿里云对象存储配置
 Aliyun:

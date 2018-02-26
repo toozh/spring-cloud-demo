@@ -1,14 +1,3 @@
-server:
-  port: 23111
-spring:
-  application:
-    name: sports
-  cloud:
-    config:
-      uri: ${CONFIG_SERVER_URI:http://localhost:8888}
-      failFast: true
-      profile: dev
-
 encrypt:
   failOnError: true
 Aliyun:

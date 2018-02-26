@@ -1,10 +1,14 @@
 spring:
   application:
-    name: sports
+    name: sports-service
   cloud:
     config:
       uri: ${CONFIG_SERVER_URI:http://10.10.8.238:8888}
       failFast: true
       profile: dev
 server:
-  port: 23112
+  tomcat:
+    max-threads: 1000
+    accept-count: 500
+    max-connections: 1000
+  port: 23111

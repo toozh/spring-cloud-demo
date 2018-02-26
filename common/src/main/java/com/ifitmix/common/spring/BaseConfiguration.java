@@ -3,9 +3,15 @@ package com.ifitmix.common.spring;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ifitmix.common.mongo.SaveMongoEventListener;
 import com.ifitmix.utils.JsonUtils;
+import io.prometheus.client.exporter.MetricsServlet;
+import io.prometheus.client.hotspot.DefaultExports;
+import io.prometheus.client.spring.boot.SpringBootMetricsCollector;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.boot.actuate.endpoint.MetricReaderPublicMetrics;
+import org.springframework.boot.actuate.endpoint.PublicMetrics;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +23,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import javax.servlet.MultipartConfigElement;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Created by zhangtao on 2017/3/20.
@@ -67,6 +75,8 @@ public class BaseConfiguration {
         return mappingConverter;
     }
 
+
+
     /**
      * 文件上传配置
      * @return
@@ -94,4 +104,23 @@ public class BaseConfiguration {
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         return new MappingJackson2HttpMessageConverter(objectMapper());
     }
+
+
+
+    @Bean
+    SpringBootMetricsCollector springBootMetricsCollector(Collection<PublicMetrics> publicMetrics) {
+        publicMetrics = publicMetrics.stream().filter(each -> !(each instanceof MetricReaderPublicMetrics)).collect(Collectors.toList());
+        SpringBootMetricsCollector springBootMetricsCollector = new SpringBootMetricsCollector(publicMetrics);
+        springBootMetricsCollector.register();
+
+        return springBootMetricsCollector;
+    }
+
+    @Bean
+    ServletRegistrationBean servletRegistrationBean() {
+        DefaultExports.initialize();
+        return new ServletRegistrationBean(new MetricsServlet(), "/ifitmix/prometheus");
+    }
+
+
 }

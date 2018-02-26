@@ -139,7 +139,7 @@ public class ClubService extends BaseMongoRepositoryImpl<Club, Long> {
             return new ResponseEntity(ClubCode.CLUB_NOT_EXIST.getCode(),
                     ClubCode.CLUB_NOT_EXIST.getMessage(SystemContextHolder.get().getLanguage()));
         }
-        if(clubRepository.findClubByUidAndName(uid, name) != null) {
+        if(!club.getName().equals(name) && clubRepository.findClubByUidAndName(club.getUid(), name) != null) {
             return new ResponseEntity(ClubCode.CLUB_NAME_REPEAT.getCode(),
                     ClubCode.CLUB_NAME_REPEAT.getMessage(SystemContextHolder.get().getLanguage()));
         }
@@ -173,7 +173,7 @@ public class ClubService extends BaseMongoRepositoryImpl<Club, Long> {
         club.setStatus(Club.STATUS_INVALID);
         clubRepository.save(club);
 
-        Query query = new Query(Criteria.where("id").is(clubId));
+        Query query = new Query(Criteria.where("clubId").is(clubId));
         Update update = new Update().set("status", ClubMember.STATUS_INVALID);
         mongoOperations.updateMulti(query, update, ClubMember.class);
 
