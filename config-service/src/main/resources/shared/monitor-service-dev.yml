@@ -1,0 +1,10 @@
+server:
+  port: 9090
+
+turbine:
+  aggregator:
+    clusterConfig: USER-SERVICE,SPORTS-SERVICE,CLUB-SERVICE
+  appConfig: USER-SERVICE,SPORTS-SERVICE,CLUB-SERVICE
+  instanceUrlSuffix: /hystrix.stream
+  clusterNameExpression: metadata['cluster']
+#  clusterNameExpression: new String('default')

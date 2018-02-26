@@ -1,0 +1,47 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.8.238:27017/club?maxPoolSize=300
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 10.10.8.238:9092,10.10.8.238:9093,10.10.8.238:9094
+          zkNodes: 10.10.8.238:2181,10.10.8.238:2182,10.10.8.238:2183
+          offsetUpdateTimeWindow: 10000
+          #offsetUpdateCount: 0
+          requiredAcks: 1
+          minPartitionCount: 1
+          replicationFactor: 1
+        bindings:
+          input:
+            consumer:
+              autoCommitOffset: true
+              startOffset: earliest
+              headerMode: raw
+          output:
+            producer:
+              bufferSize: 16384
+              sync: true
+              batchTimeout: 0
+#              bootstrapServers: 10.10.8.238:9092
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+    metadataMap:
+      cluster: CLUB-SERVICE
+  client:
+    serviceUrl:
+      defaultZone: http://10.10.8.238:8761/eureka/
+
+
+
+
+# 系统参数配置
+# 俱乐部最大人数
+APP_CLUB_MAX_MEMBERS: 50
+# 置顶俱乐部ID
+APP_CLUB_TOP_CLUB: 527

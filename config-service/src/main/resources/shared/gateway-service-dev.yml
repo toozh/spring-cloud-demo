@@ -1,0 +1,45 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.8.238:27017/business?maxPoolSize=300
+  redis:
+    host: 10.10.8.238
+    database: 1
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 5000000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+    max-total-connections: 1000
+    max-per-route-connections: 500
+    ribbon-isolation-strategy: THREAD
+  routes:
+    auth-service:
+      path: /uaa/**
+      serviceId: auth-service
+      stringPrefix: false
+      sersitiveHeaders:
+    sports-service:
+      path: /**/sports/**
+      serviceId: sports
+      stringPrefix: false
+      sersitiveHeaders:
+    user-service:
+      path: /**/user/**
+      serviceId: user-service
+      stringPrefix: false
+      sersitiveHeaders:
+    club-service:
+      path: /**/club/**
+      serviceId: club-service
+      stringPrefix: false
+      sersitiveHeaders:
+

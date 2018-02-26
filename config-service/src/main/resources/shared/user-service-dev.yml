@@ -1,0 +1,38 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://10.10.8.238:27017/business?maxPoolSize=300
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 10.10.8.238:9092,10.10.8.238:9093,10.10.8.238:9094
+          zkNodes: 10.10.8.238:2181,10.10.8.238:2182,10.10.8.238:2183
+          offsetUpdateTimeWindow: 10000
+          #offsetUpdateCount: 0
+          requiredAcks: 1
+          minPartitionCount: 1
+          replicationFactor: 1
+        bindings:
+          input:
+            consumer:
+              autoCommitOffset: true
+              startOffset: earliest
+              headerMode: raw
+          output:
+            producer:
+              bufferSize: 16384
+              sync: true
+              batchTimeout: 0
+#              bootstrapServers: 10.10.8.238:9092
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+    metadataMap:
+      cluster: USER-SERVICE
+  client:
+    serviceUrl:
+      defaultZone: http://10.10.8.238:8761/eureka/
